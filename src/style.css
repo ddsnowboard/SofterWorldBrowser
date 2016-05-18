@@ -1,0 +1,38 @@
+#holder { 
+    display: inline-block;
+}
+#imageHolder {
+    width: 100%;
+}
+#UI {
+    width: 100%;
+}
+.button {
+    cursor: pointer;
+}
+/* These colors have to go */
+#left {
+    text-align: left;
+    background-color: #5F9398;
+}
+#right {
+    text-align: right;
+    background-color: #5F9398;
+}
+#random {
+    text-align: center;
+    background-color: #985F93;
+}
+#showTitle {
+    text-align: center;
+    background-color: #93985F;
+}
+#titleBox {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background-color: silver;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+}
