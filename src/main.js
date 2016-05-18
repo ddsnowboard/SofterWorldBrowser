@@ -5,6 +5,36 @@ function Comic(url, title)
 }
 $(document).ready(function() 
         {
+            function getComic(number)
+            {
+                    var xhr = new XMLHttpRequest();
+                    var output;
+                    xhr.onreadystatechange = function(event)
+                    {
+                        if(this.readyState === 4)
+                        {
+                            output = new Comic(this.response.url, this.response.title);
+                        }
+                    };
+                    xhr.open("get", "getComic?number=" + number.toString(), false);
+                    xhr.send();
+                    return output;
+            }
+            function startCaching(number)
+            {
+                comics[number - 1] = getComic(number - 1);
+                comics[number + 1] = getComic(number + 1);
+                nextRand = Math.floor(Math.random() * maxComics) + 1;
+                comics[nextRand] = getComic(nextRand);
+            }
+            function showComic(number)
+            {
+                if(comics[number] == undefined)
+                {
+                    comics[number] = getComic(number);
+                }
+                $("#imageHolder").html("<img src=\"" + comics[number] + "\">");
+            }
             var maxComics;
             var comicNum;
             var nextRand;
@@ -53,6 +83,17 @@ $(document).ready(function()
                             $("#titleBox").css("visibility", "invisible");
                     });
             var startXHR = new XMLHttpRequest();
-            // This XHR should go get the first comic and load it, and when it's done, it 
-            // should start loading all the other ones.
+            startXHR.onreadystatechange = function(event)
+            {
+                if(this.readyState === 4)
+                {
+                    comicNum = this.response.number;
+                    maxComics = comicNum;
+                    comics[comicNum] = new Comic(this.response.url, this.response.title);
+                    showComic(comicNum);
+                    startCaching(comicNum);
+                }
+            };
+            startXHR.open("get", "newestComic.php");
+            startXHR.send();
         });
