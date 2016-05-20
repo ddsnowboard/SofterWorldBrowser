@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from urllib2 import urlopen
 import re
-from sys import argv
+from sys import argv, stderr
 import json
 import HTMLParser
 class SWParser(HTMLParser.HTMLParser):
@@ -14,6 +14,7 @@ class SWParser(HTMLParser.HTMLParser):
         self.number = -1
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        attrs = {i.encode("ascii", "ignore"): j.encode("ascii", "ignore") for i, j in attrs.iteritems()}
         if tag == "div" and attrs.get("id") == "comicimg":
             self.coming = True
         elif tag == "img" and self.coming:
@@ -23,7 +24,8 @@ class SWParser(HTMLParser.HTMLParser):
         elif tag == "div" and attrs.get("id") == "previous":
             self.onPrevious = True
         elif tag == "a" and self.onPrevious:
-            regex = re.compile(r"index[.]php[?]=(?<last>[0-9]+)")
+            regex = re.compile(r"index[.]php[?]id=(?P<number>[0-9]+)")
+            print >> stderr, "attrs is %s" % attrs
             self.number = int(regex.search(attrs.get("href")).group("number")) + 1
             self.onPrevious = False
 parser = SWParser()
