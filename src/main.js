@@ -74,12 +74,19 @@ $(document).ready(function()
                             comicNum = nextRand;
                             showComic(comicNum);
                             nextRand = undefined;
+                            startCaching(comicNum);
                         }
                     });
             $("#showTitle").click(function() 
                     {
-                        $("#titleBox").html(comics[comicNum].title);
-                        $("#titleBox").css("display", "block");
+                        var $titleBox = $("#titleBox");
+                        if($titleBox.css("display") === "none")
+                        {
+                            $titleBox.html(comics[comicNum].title);
+                            $titleBox.css("display", "block");
+                        }
+                        else
+                            $titleBox.click();
                     });
             $(document).keydown(function(event)
                     {
