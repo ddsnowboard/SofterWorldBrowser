@@ -78,6 +78,14 @@ $(document).ready(function()
                     {
                         if(event.which === 27)
                             $("#titleBox").click();
+                        else if(event.which === 90)
+                            $("#left").click();
+                        else if(event.which === 67)
+                            $("#right").click();
+                        else if(event.which === 83)
+                            $("#random").click();
+                        else if(event.which === 88)
+                            $("#showTitle").click();
                     });
             $("#titleBox").click(function()
                     {
