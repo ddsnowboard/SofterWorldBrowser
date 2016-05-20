@@ -7,18 +7,20 @@ $(document).ready(function()
         {
             function getComic(number)
             {
-                    var xhr = new XMLHttpRequest();
-                    var output;
-                    xhr.onreadystatechange = function(event)
+                var xhr = new XMLHttpRequest();
+                var output;
+                xhr.onreadystatechange = function(event)
+                {
+                    if(this.readyState === 4)
                     {
-                        if(this.readyState === 4)
-                        {
-                            output = new Comic(this.response.url, this.response.title);
-                        }
-                    };
-                    xhr.open("get", "getComic?number=" + number.toString(), false);
-                    xhr.send();
-                    return output;
+                        var response = JSON.parse(this.response);
+                        output = new Comic(response.url, response.title);
+                    }
+                };
+                xhr.open("get", "getComic.php?number=" + number.toString(), false);
+                console.log("getComic.php?number=" + number.toString());
+                xhr.send();
+                return output;
             }
             function startCaching(number)
             {
@@ -33,7 +35,7 @@ $(document).ready(function()
                 {
                     comics[number] = getComic(number);
                 }
-                $("#imageHolder").html("<img src=\"" + comics[number] + "\">");
+                $("#imageHolder").html("<img src=\"" + comics[number].url + "\">");
             }
             var maxComics;
             var comicNum;
@@ -87,9 +89,11 @@ $(document).ready(function()
             {
                 if(this.readyState === 4)
                 {
-                    comicNum = this.response.number;
+                    var response = JSON.parse(this.response);
+                    comicNum = response.number;
+                    console.log(response);
                     maxComics = comicNum;
-                    comics[comicNum] = new Comic(this.response.url, this.response.title);
+                    comics[comicNum] = new Comic(response.url, response.title);
                     showComic(comicNum);
                     startCaching(comicNum);
                 }
