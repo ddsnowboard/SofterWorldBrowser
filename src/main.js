@@ -37,6 +37,7 @@ $(document).ready(function()
                     comics[number] = getComic(number);
                 }
                 $("#imageHolder").html("<img src=\"" + comics[number].url + "\">");
+                $("#number").html(number);
             }
             var maxComics;
             var comicNum;
@@ -101,7 +102,6 @@ $(document).ready(function()
                 {
                     var response = JSON.parse(this.response);
                     comicNum = response.number;
-                    console.log(response);
                     maxComics = comicNum;
                     comics[comicNum] = new Comic(response.url, response.title);
                     showComic(comicNum);
