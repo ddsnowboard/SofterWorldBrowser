@@ -31,6 +31,7 @@ $(document).ready(function()
             }
             function showComic(number)
             {
+                $("#titleBox").click();
                 if(comics[number] == undefined)
                 {
                     comics[number] = getComic(number);
@@ -89,7 +90,6 @@ $(document).ready(function()
                     });
             $("#titleBox").click(function()
                     {
-                        console.log("clicked!");
                         if($(this).css("display") === "block")
                             $("#titleBox").css("display", "none");
                     });
