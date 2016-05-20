@@ -32,6 +32,7 @@
     background-color: #93985F;
 }
 #titleBox {
+    display: none;
     position: absolute;
     top: 25%;
     left: 25%;
@@ -39,4 +40,8 @@
     border-radius: 5px;
     width: auto;
     height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
 }

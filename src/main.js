@@ -69,10 +69,10 @@ $(document).ready(function()
                             showComic(comicNum);
                         }
                     });
-            $("#title").click(function() 
+            $("#showTitle").click(function() 
                     {
                         $("#titleBox").html(comics[comicNum].title);
-                        $("#titleBox").css("visibility", "visible");
+                        $("#titleBox").css("display", "block");
                     });
             $(document).keydown(function(event)
                     {
@@ -81,8 +81,9 @@ $(document).ready(function()
                     });
             $("#titleBox").click(function()
                     {
-                        if($(this).css("visibility") === "visible")
-                            $("#titleBox").css("visibility", "invisible");
+                        console.log("clicked!");
+                        if($(this).css("display") === "block")
+                            $("#titleBox").css("display", "none");
                     });
             var startXHR = new XMLHttpRequest();
             startXHR.onreadystatechange = function(event)
