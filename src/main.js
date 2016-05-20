@@ -68,6 +68,7 @@ $(document).ready(function()
                             }
                             comicNum = nextRand;
                             showComic(comicNum);
+                            nextRand = undefined;
                         }
                     });
             $("#showTitle").click(function() 
