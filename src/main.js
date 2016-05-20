@@ -15,6 +15,8 @@ $(document).ready(function()
                     {
                         var response = JSON.parse(this.response);
                         output = new Comic(response.url, response.title);
+                        console.log(output);
+                        $("#prefetch").append("<img src=\"" + output.url + "\">");
                     }
                 };
                 xhr.open("get", "getComic.php?number=" + number.toString(), false);
