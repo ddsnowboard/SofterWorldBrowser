@@ -5,7 +5,7 @@ function Comic(url, title)
 }
 $(document).ready(function() 
         {
-            function getComic(number)
+            function getComic(number, async)
             {
                 var xhr = new XMLHttpRequest();
                 var output;
@@ -14,32 +14,34 @@ $(document).ready(function()
                     if(this.readyState === 4)
                     {
                         var response = JSON.parse(this.response);
+                        comics[number] = new Comic(response.url, response.title);
                         output = new Comic(response.url, response.title);
                         console.log(output);
                         $("#prefetch").append("<img src=\"" + output.url + "\">");
                     }
                 };
-                xhr.open("get", "getComic.php?number=" + number.toString(), false);
-                console.log("getComic.php?number=" + number.toString());
+                xhr.open("get", "getComic.php?number=" + number.toString(), async);
                 xhr.send();
-                return output;
+                if(!async)
+                    return output;
             }
             function startCaching(number)
             {
-                comics[number - 1] = getComic(number - 1);
-                comics[number + 1] = getComic(number + 1);
+                getComic(number - 1, true);
+                getComic(number + 1, true);
                 nextRand = Math.floor(Math.random() * maxComics) + 1;
-                comics[nextRand] = getComic(nextRand);
+                getComic(nextRand, true);
             }
             function showComic(number)
             {
                 $("#titleBox").click();
                 if(comics[number] == undefined)
                 {
-                    comics[number] = getComic(number);
+                    getComic(number, false);
                 }
                 $("#imageHolder").html("<img src=\"" + comics[number].url + "\">");
                 $("#number").html(number);
+                startCaching(number);
             }
             var maxComics;
             var comicNum;
