@@ -1,3 +1,5 @@
+<!-- This gets the url of the image of a certain comic, 
+given by the HTTP GET parameter "number" -->
 <?php
 if(!isset($_GET["number"]))
 {

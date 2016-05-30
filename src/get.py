@@ -4,6 +4,13 @@ import re
 from sys import argv, stderr
 import json
 import HTMLParser
+
+# This class was stolen from another project that I had to do something
+# somewhat similar to this. I didn't just use a PHP HTML library because
+# I wanted to eliminate dependencies, and every Linux box that I've ever
+# installed came with Python 2.7, so I rewrote this for Python 2 and 
+# used it instead.
+
 class SWParser(HTMLParser.HTMLParser):
     def __init__(self, *args, **kwargs):
         HTMLParser.HTMLParser.__init__(self, *args, **kwargs)

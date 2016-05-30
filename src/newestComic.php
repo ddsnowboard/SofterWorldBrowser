@@ -1,3 +1,6 @@
+<!-- This page returns the newest comic. Since they are no longer
+publishing, it should pretty much always return the same thing, but 
+I thought I should have it to be safe instead of just hard-coding a number -->
 <?php
 $out = array();
 $url = "http://www.asofterworld.com/";
