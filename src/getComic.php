@@ -8,7 +8,7 @@ if(!isset($_GET["number"]))
 else
 {
     $out = array();
-    $url = "http://www.asofterworld.com/index.php?id=" . $_GET["number"];
+    $url = "https://www.asofterworld.com/index.php?id=" . $_GET["number"];
     $shell = shell_exec("python get.py $url");
     $download = json_decode($shell);
     if(isset($download->error))
