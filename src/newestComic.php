@@ -3,7 +3,7 @@
 // publishing, it should pretty much always return the same thing, but 
 // I thought I should have it to be safe instead of just hard-coding a number
 $out = array();
-$url = "https://www.asofterworld.com/";
+$url = "http://www.asofterworld.com/";
 $shell = shell_exec("python get.py $url");
 $download = json_decode($shell);
 if(isset($download->error))
