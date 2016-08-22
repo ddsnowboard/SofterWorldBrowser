@@ -13,6 +13,7 @@ $(document).ready(function()
                 {
                     if(this.readyState === 4)
                     {
+                        console.log(this.response);
                         var response = JSON.parse(this.response);
                         comics[number] = new Comic(response.url, response.title);
                         output = new Comic(response.url, response.title);

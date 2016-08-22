@@ -1,6 +1,6 @@
-<!-- This gets the url of the image of a certain comic, 
-given by the HTTP GET parameter "number" -->
 <?php
+// This gets the url of the image of a certain comic, 
+// given by the HTTP GET parameter "number"
 if(!isset($_GET["number"]))
 {
     echo json_encode(["error"=>"You didn't give a number for the comic, fool!"]);
