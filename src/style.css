@@ -18,19 +18,19 @@
 /* These colors have to go */
 #left {
     text-align: left;
-    background-color: #5F9398;
+    background-color: #456d48;
 }
 #right {
     text-align: right;
-    background-color: #5F9398;
+    background-color: #456d48;
 }
 #random {
     text-align: center;
-    background-color: #985F93;
+    background-color: #8cb7a6;
 }
 #showTitle {
     text-align: center;
-    background-color: #93985F;
+    background-color: #88a2aa;
 }
 #titleBox {
     display: none;
