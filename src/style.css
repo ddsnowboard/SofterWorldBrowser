@@ -13,6 +13,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    height: 40px;
 }
 /* These colors have to go */
 #left {
