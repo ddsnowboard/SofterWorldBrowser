@@ -29,7 +29,10 @@ $(document).ready(function() {
         getComic(nextRand, true);
     }
 
-    function showComic(number) {
+    function showComic(number, fromBackButton) {
+        if(fromBackButton == false)
+            history.pushState(number, "#" + number.toString(), "?comic=" + number);
+        // This removes the title box if it's there
         $("#titleBox").click();
         if (comics[number] == undefined) {
             getComic(number, false);
@@ -38,6 +41,10 @@ $(document).ready(function() {
         $("#number").html(number);
         startCaching(number);
     }
+    window.onpopstate = function(state)
+    {
+        showComic(state.state, true);
+    };
     var maxComics;
     var comicNum;
     var nextRand;
@@ -45,13 +52,13 @@ $(document).ready(function() {
     $("#left").click(function() {
         if (comicNum != undefined) {
             comicNum--;
-            showComic(comicNum);
+            showComic(comicNum, false);
         }
     });
     $("#right").click(function() {
         if (comicNum != undefined) {
             comicNum++;
-            showComic(comicNum);
+            showComic(comicNum, false);
         }
     });
     $("#random").click(function() {
@@ -60,7 +67,7 @@ $(document).ready(function() {
                 nextRand = Math.floor(Math.random() * maxComics) + 1;
             }
             comicNum = nextRand;
-            showComic(comicNum);
+            showComic(comicNum, false);
             nextRand = undefined;
             startCaching(comicNum);
         }
@@ -125,14 +132,24 @@ $(document).ready(function() {
         if ($(this).css("display") === "block")
             $("#titleBox").css("display", "none");
     });
+    var queryString = new URLSearchParams(window.location.search);
+    var queryHasComic = queryString.has("comic");
+    if(queryHasComic)
+    {
+        comicNum = parseInt(queryString.get("comic"));
+        showComic(comicNum, false);
+    }
     var startXHR = new XMLHttpRequest();
     startXHR.onreadystatechange = function(event) {
         if (this.readyState === 4) {
             var response = JSON.parse(this.response);
-            comicNum = response.number;
+            if(!queryHasComic)
+            {
+                comicNum = response.number;
+                showComic(comicNum, false);
+            }
             maxComics = comicNum;
             comics[comicNum] = new Comic(response.url, response.title);
-            showComic(comicNum);
             startCaching(comicNum);
         }
     };
