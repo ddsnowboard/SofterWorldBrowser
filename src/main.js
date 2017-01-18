@@ -3,7 +3,7 @@ function Comic(url, title) {
     this.title = title;
 }
 $(document).ready(function() {
-    function getComic(number, async) {
+    function getComic(number, asynchronous) {
         var xhr = new XMLHttpRequest();
         var output;
         xhr.onreadystatechange = function(event) {
@@ -14,9 +14,11 @@ $(document).ready(function() {
                 $("#prefetch").append("<img src=\"" + output.url + "\">");
             }
         };
-        xhr.open("get", "getComic.php?number=" + number.toString(), async);
+        // I know that using synchronous XHR's is bad, but otherwise it gets really complicated 
+        // and as far as my testing shows, nothing bad happens when I do it this way 
+        xhr.open("get", "getComic.php?number=" + number.toString(), asynchronous);
         xhr.send();
-        if (!async)
+        if (!asynchronous)
             return output;
     }
 
