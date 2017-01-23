@@ -19,7 +19,7 @@ $(document).ready(function() {
         xhr.open("get", "getComic.php?number=" + number.toString(), asynchronous);
         xhr.send();
         if (!asynchronous)
-            return output;
+            return comics[number];
     }
 
     function startCaching(number) {
@@ -81,16 +81,28 @@ $(document).ready(function() {
             $titleBox.click();
     });
     $(document).keydown(function(event) {
-        if (event.which === 27)
-            $("#titleBox").click();
-        else if (event.which === 90)
-            $("#left").click();
-        else if (event.which === 67)
-            $("#right").click();
-        else if (event.which === 83)
-            $("#random").click();
-        else if (event.which === 88)
-            $("#showTitle").click();
+        var ESCAPE = 27;
+        var Z = 90;
+        var C = 67;
+        var S = 83;
+        var X = 88;
+        switch(event.which) {
+            case ESCAPE:
+                $("#titleBox").click();
+                break;
+            case Z:
+                $("#left").click();
+                break;
+            case C:
+                $("#right").click();
+                break;
+            case S:
+                $("#random").click();
+                break;
+            case X:
+                $("#showTitle").click();
+                break;
+        }
     });
     var lastTouchStartingX = 0;
     var lastTouchStartingY = 0;
@@ -132,6 +144,12 @@ $(document).ready(function() {
         if ($(this).css("display") === "block")
             $("#titleBox").css("display", "none");
     });
+
+    // This handles the possibility of the browser recovering from a 
+    // crash or someone clicking on a link to get a comic and having
+    // a comic number in the URL from a session that we don't have
+    // on the history stack. This is only run when you first load
+    // the site.
     var queryString = new URLSearchParams(window.location.search);
     var queryHasComic = queryString.has("comic");
     if(queryHasComic)
