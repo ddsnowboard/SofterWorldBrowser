@@ -1,6 +1,7 @@
-function Comic(url, title) {
+function Comic(url, title, favorite) {
     this.url = url;
     this.title = title;
+    this.favorite = favorite;
 }
 $(document).ready(function() {
     function getComic(number, asynchronous) {
@@ -9,9 +10,11 @@ $(document).ready(function() {
         xhr.onreadystatechange = function(event) {
             if (this.readyState === 4) {
                 var response = JSON.parse(this.response);
-                comics[number] = new Comic(response.url, response.title);
-                output = new Comic(response.url, response.title);
-                $("#prefetch").append("<img src=\"" + output.url + "\">");
+                // THIS IS JUST A STOPGAP; I NEED TO CHANGE THIS WHEN I ACTUALLY DO THE 
+                // FEATURE
+                response.favorite = false;
+                comics[number] = new Comic(response.url, response.title, response.favorite);
+                $("#prefetch").append("<img src=\"" + comics[number].url + "\">");
             }
         };
         // I know that using synchronous XHR's is bad, but otherwise it gets really complicated 
@@ -86,6 +89,7 @@ $(document).ready(function() {
         var C = 67;
         var S = 83;
         var X = 88;
+        var F = 70;
         switch(event.which) {
             case ESCAPE:
                 $("#titleBox").click();
@@ -101,6 +105,9 @@ $(document).ready(function() {
                 break;
             case X:
                 $("#showTitle").click();
+                break;
+            case F:
+                $("#favorite").click();
                 break;
         }
     });
@@ -144,6 +151,10 @@ $(document).ready(function() {
         if ($(this).css("display") === "block")
             $("#titleBox").css("display", "none");
     });
+    $("#favorite").click(function() {
+        $(this).toggleClass("favorited");
+    });
+
 
     // This handles the possibility of the browser recovering from a 
     // crash or someone clicking on a link to get a comic and having
@@ -167,7 +178,10 @@ $(document).ready(function() {
                 showComic(comicNum, false);
             }
             maxComics = comicNum;
-            comics[comicNum] = new Comic(response.url, response.title);
+            // THIS IS JUST A STOPGAP; I NEED TO CHANGE THIS WHEN I ACTUALLY DO THE 
+            // FEATURE
+            response.favorite = false;
+            comics[comicNum] = new Comic(response.url, response.title, response.favorite);
             startCaching(comicNum);
         }
     };

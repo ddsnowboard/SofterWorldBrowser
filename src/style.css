@@ -34,6 +34,20 @@
     background-color: #8cb7a6;
 }
 
+#favorite {
+    text-align: center;
+    background-color: #8cb7a6;
+}
+
+.favorited {
+    /* 
+     * I know this isn't exactly good practice, 
+     * but I need to do this so I can just toggle this
+     * and change the color
+     */
+    background-color: #b78c9d !important;
+}
+
 #showTitle {
     text-align: center;
     background-color: #88a2aa;
