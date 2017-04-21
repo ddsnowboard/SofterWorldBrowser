@@ -20,7 +20,7 @@ class SWParser(HTMLParser.HTMLParser):
         self.title = ""
         self.number = -1
     def handle_starttag(self, tag, attrs):
-        attrs = {i.encode("ascii", "ignore"): j.encode("ascii", "ignore") for i, j in attrs}
+        attrs = {i.encode("ascii", "ignore"): j.encode("ascii", "ignore") for i, j in attrs if i and j}
         if tag == "div" and attrs.get("id") == "comicimg":
             self.coming = True
         elif tag == "img" and self.coming:
@@ -38,7 +38,8 @@ class SWParser(HTMLParser.HTMLParser):
 
 parser = SWParser()
 f = urlopen(argv[1])
-parser.feed(f.read().decode("UTF-8", "ignore"))
+text = f.read().decode("UTF-8", "ignore")
+parser.feed(text)
 if parser.link:
     output = {}
     output["url"] = parser.link
