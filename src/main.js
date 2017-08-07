@@ -3,6 +3,11 @@ function Comic(url, title) {
     this.title = title;
 }
 $(document).ready(function() {
+    /**
+     * This gets a comic from the server and returns it iff you set
+     * `asynchronous` to false, otherwise it returns nothing. Either way, 
+     * it will put the comic in the `comics` array.
+     */
     function getComic(number, asynchronous) {
         var xhr = new XMLHttpRequest();
         var output;
