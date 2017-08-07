@@ -43,6 +43,7 @@ $(document).ready(function() {
     }
     window.onpopstate = function(state)
     {
+        comicNum = state.state;
         showComic(state.state, true);
     };
     var maxComics;
