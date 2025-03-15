@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <rss version="2.0" xmlns:p="http://world.episerver.com/feeds/EpiserverRSS20.xsd">
+      <channel>
+        <title>A Softer World</title>
+        <link>http://casualvegetables.duckdns.org</link>
+        <item>
+          <title>505</title>
+          <link>http://casualvegetables.duckdns.org/getComic.php?number=505</link>
+          <guid>505</guid>
+          <media:content url="http://casualvegetables.duckdns.org/getComic.php?number=505</p:imageLink" type="image/jpg">
+        </item>
+      </channel>
+    </rss>
