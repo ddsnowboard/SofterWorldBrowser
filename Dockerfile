@@ -11,4 +11,6 @@ RUN a2enmod rewrite
 COPY src /var/www/src
 RUN chown -R www-data:www-data /var/www
 
+EXPOSE 80
+
 CMD ["start-apache"]
