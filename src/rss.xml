@@ -7,7 +7,7 @@
           <title>505</title>
           <link>http://casualvegetables.duckdns.org/getComic.php?number=505</link>
           <guid>505</guid>
-          <media:content url="http://casualvegetables.duckdns.org/getComic.php?number=505</p:imageLink" type="image/jpg">
+	  <enclosure length="83051" type="image/jpg" url="http://casualvegetables.duckdns.org/getComic.php?number=505" />
         </item>
       </channel>
     </rss>
