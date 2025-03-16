@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>A Softer World</title>
+		<link>http://softerworld.casualvegetables.duckdns.org/</link>
+		<description>A Softer World Comic</description>
+		<language>en-us</language>
+		<item>
+			<title>1000</title>
+			<description><![CDATA[<a href="http://softerworld.casualvegetables.duckdns.org/?comic=1000">
+					<img src="https://www.asofterworld.com/clean/millennial.jpg" />				</a>
+					]]>
+			</description>
+			<link>https://www.smbc-comics.com/comic/rational-3</link>
+			<guid>1000</guid>
+		</item>
+	</channel>
+</rss>
