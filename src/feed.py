@@ -1,4 +1,5 @@
 from get import parse
+from concurrent.futures import ThreadPoolExecutor
 import random
 from datetime import date, timedelta
 max_id = parse("http://www.asofterworld.com/").number
@@ -22,7 +23,8 @@ def item_for_day(day):
 		</item>
     """.format(title=parser.title, idx=idx, url=parser.link)
 
-items = [item_for_day(date.today() - timedelta(days=n_days_before)) for n_days_before in range(n_days)]
+pool = ThreadPoolExecutor()
+items = pool.map(lambda n_days_before: item_for_day(date.today() - timedelta(days=n_days_before)), range(n_days))
 
 print("""
 <?xml version="1.0" encoding="UTF-8" ?>
