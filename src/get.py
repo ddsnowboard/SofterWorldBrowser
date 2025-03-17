@@ -36,15 +36,20 @@ class SWParser(HTMLParser.HTMLParser):
             self.number = int(regex.search(attrs.get("href")).group("number")) + 1
             self.onPrevious = False
 
-parser = SWParser()
-f = urlopen(argv[1])
-text = f.read().decode("UTF-8", "ignore")
-parser.feed(text)
-if parser.link:
-    output = {}
-    output["url"] = parser.link
-    output["number"] = parser.number
-    output["title"] = parser.title
-    print json.dumps(output, ensure_ascii=True)
-else:
-    print json.dumps({"error": "Something bad happened. Don't know what"})
+def parse(url):
+    parser = SWParser()
+    f = urlopen(url)
+    text = f.read().decode("UTF-8", "ignore")
+    parser.feed(text)
+    return parser
+
+if __name__ == "__main__":
+    parser = parse(argv[1])
+    if parser.link:
+        output = {}
+        output["url"] = parser.link
+        output["number"] = parser.number
+        output["title"] = parser.title
+        print json.dumps(output, ensure_ascii=True)
+    else:
+        print json.dumps({"error": "Something bad happened. Don't know what"})
