@@ -1,26 +1,20 @@
 #!/usr/bin/python
-from urllib2 import urlopen
+from urllib.request import urlopen
 import re
 from sys import argv, stderr
 import json
-import HTMLParser
+from html.parser import HTMLParser
 
-# This class was stolen from another project that I had to do something
-# somewhat similar to this. I didn't just use a PHP HTML library because
-# I wanted to eliminate dependencies, and every Linux box that I've ever
-# installed came with Python 2.7, so I rewrote this for Python 2 and 
-# used it instead.
-
-class SWParser(HTMLParser.HTMLParser):
+class SWParser(HTMLParser):
     def __init__(self, *args, **kwargs):
-        HTMLParser.HTMLParser.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.coming = False
         self.onPrevious = False
         self.link = ''
         self.title = ""
         self.number = -1
     def handle_starttag(self, tag, attrs):
-        attrs = {i.encode("ascii", "ignore"): j.encode("ascii", "ignore") for i, j in attrs if i and j}
+        attrs = {i: j for i, j in attrs if i and j}
         if tag == "div" and attrs.get("id") == "comicimg":
             self.coming = True
         elif tag == "img" and self.coming:
@@ -50,6 +44,6 @@ if __name__ == "__main__":
         output["url"] = parser.link
         output["number"] = parser.number
         output["title"] = parser.title
-        print json.dumps(output, ensure_ascii=True)
+        print(json.dumps(output, ensure_ascii=True))
     else:
-        print json.dumps({"error": "Something bad happened. Don't know what"})
+        print(json.dumps({"error": "Something bad happened. Don't know what"}))

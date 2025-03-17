@@ -22,9 +22,9 @@ def item_for_day(day):
 		</item>
     """.format(title=parser.title, idx=idx, url=parser.link)
 
-items = [item_for_day(date.today() - timedelta(days=n_days_before)) for n_days_before in xrange(n_days)]
+items = [item_for_day(date.today() - timedelta(days=n_days_before)) for n_days_before in range(n_days)]
 
-print """
+print("""
 <?xml version="1.0" encoding="UTF-8" ?>
 	<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
 	<channel>
@@ -35,4 +35,4 @@ print """
         {}
 	</channel>
 </rss>
-""".format("\n".join(items))
+""".format("\n".join(items)))

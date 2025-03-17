@@ -1,2 +1,2 @@
 <?php
-echo shell_exec("python feed.py");
+echo shell_exec("python3 feed.py");
